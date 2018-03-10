@@ -3,6 +3,7 @@ service: pargi-analytics
 provider:
   name: aws
   runtime: go1.x
+  memorySize: 256
   apiKeys:
     - ${self:service}-${opt:stage, self:provider.stage}
   usagePlan:
