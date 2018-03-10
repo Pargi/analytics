@@ -55,5 +55,3 @@
     + Body
 
             {"guid":"1d6e40a1-8b0f-4b28-9480-bc5738932efa","device":"587c5ad1-484f-46db-a2b0-67564a6250a4","appVersion":"3.0.1","start":"2018-03-10T13:59:39Z","end":"2018-03-10T14:29:39Z","zone":"KESKLINN","latitude":59.437,"longitude":24.7536}
-
-
