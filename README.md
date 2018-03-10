@@ -2,6 +2,9 @@
 
 This repository contains a simple backend service, built on the Serverless framework, which exposes an endpoint for gathering analytics data from Pargi. As the goal of this service is super simple, it does not currently offer any test coverage for its features or in-depth documentation.
 
+_Diagram of the service, also visible in [cloudcraft](https://cloudcraft.co/view/ab345fa7-b906-4eae-8ad6-7d83f22b8b5e?key=58Zkh9mf6XbB4h3hb75qYw)_
+![Architecture](/images/architecture.png)
+
 ## API
 
 The API for the service is documented in [API.md](/API.md) as well as the further commented [Paw document](/API.paw) (for reference, [Paw](https://paw.cloud) is a tool for testing APIs).
