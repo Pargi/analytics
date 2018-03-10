@@ -1,0 +1,68 @@
+service: pargi-analytics
+
+provider:
+  name: aws
+  runtime: go1.x
+  apiKeys:
+    - ${self:service}-${opt:stage, self:provider.stage}
+  usagePlan:
+    throttle:
+      burstLimit: 200
+      rateLimit: 100
+  environment:
+    DYNAMODB_TABLE: "${self:service}-${opt:stage, self:provider.stage}-events"
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+package:
+ exclude:
+   - ./**
+ include:
+   - ./bin/**
+
+functions:
+  health:
+    handler: bin/health
+    events:
+      - http:
+          path: health
+          method: get
+          cors: true
+          private: true
+  events:
+    handler: bin/events
+    events:
+      - http:
+          path: events
+          method: post
+          cors: true
+          private: true
+          request:
+            parameters:
+              headers:
+                x-app-version: false
+
+resources:
+  Resources:
+    EventsDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: guid
+            AttributeType: S
+        KeySchema:
+          - AttributeName: guid
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
