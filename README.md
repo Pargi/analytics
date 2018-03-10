@@ -12,4 +12,19 @@ As part of the deployment, Serverless creates all the necessary resources for th
 
 ## Development
 
-The service is built on top of [Serverless](https://serverless.com) using the Go language. Refer to Serverless docs for how to deploy/develop/maintain the service.
+The service is built on top of [Serverless](https://serverless.com) using the Go language. Refer to Serverless docs for how to deploy/develop/maintain the service. The following commands should enable deploying a dev stage of the service.
+
+```
+dep ensure
+make
+serverless deploy
+```
+
+These assume a functioning install of [Go](https://golang.org), [dep](https://github.com/golang/dep) and [Serverless](https://serverless.com). All of these can be installed with these commands
+
+```
+npm i -g serverless
+brew update
+brew install go
+brew install dep
+```
