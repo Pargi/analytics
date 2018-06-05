@@ -28,6 +28,7 @@ type Item struct {
     Zone string`json:"zone" validate:"required"`
     Latitude float64`json:"latitude,omitempty"`
     Longitude float64`json:"longitude,omitempty"`
+    AlternativeZones []string`json:"alternativeZones"`
 }
 
 var validate *validator.Validate
